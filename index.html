@@ -66,9 +66,20 @@ document.getElementById("login").addEventListener("submit",async(e)=>{
   try {
     if((await sha256(user))!==USER_HASH) throw new Error("invalid");
     const page=await decryptPage(pass);
-    document.open();
-    document.write(page);
-    document.close();
+
+    // Mantém o painel original em um documento próprio.
+    // Assim, todos os <script> do painel (XLSX, Chart.js e código interno)
+    // são executados pelo navegador normalmente, sem interferir na autenticação.
+    const frame=document.createElement('iframe');
+    frame.id='gtek-panel-frame';
+    frame.setAttribute('title','Painel Gtek');
+    frame.setAttribute('allow','clipboard-read; clipboard-write');
+    frame.style.cssText='position:fixed;inset:0;width:100%;height:100%;border:0;background:#000;z-index:1;';
+    frame.srcdoc=page;
+
+    document.body.innerHTML='';
+    document.body.style.cssText='margin:0;padding:0;overflow:hidden;background:#000;';
+    document.body.appendChild(frame);
   } catch(_) {
     err.textContent="Usuário ou senha inválidos.";
     document.getElementById("pass").value="";
