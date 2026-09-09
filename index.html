@@ -57,74 +57,6 @@ async function decryptPage(password) {
   const plain=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64ToBytes(IV)},key,b64ToBytes(DATA));
   return new TextDecoder().decode(plain);
 }
-
-async function mountDecryptedPage(page) {
-  const parsed = new DOMParser().parseFromString(page, "text/html");
-
-  if (!parsed || !parsed.documentElement || !parsed.body) {
-    throw new Error("Não foi possível carregar o painel.");
-  }
-
-  // Guarda os scripts e depois os executa na mesma ordem do HTML original.
-  const originalScripts = Array.from(parsed.querySelectorAll("script")).map(s => ({
-    src: s.getAttribute("src"),
-    type: s.getAttribute("type"),
-    text: s.textContent || "",
-    attrs: Array.from(s.attributes).map(a => [a.name, a.value]),
-    inHead: s.parentElement && s.parentElement.tagName === "HEAD"
-  }));
-
-  // Copia atributos do documento/body.
-  document.documentElement.lang = parsed.documentElement.lang || "pt-BR";
-  document.body.replaceChildren();
-  Array.from(parsed.body.attributes).forEach(a => {
-    document.body.setAttribute(a.name, a.value);
-  });
-
-  // Copia HEAD sem os scripts (scripts serão executados manualmente).
-  document.head.replaceChildren();
-  Array.from(parsed.head.childNodes).forEach(node => {
-    if (!(node.nodeType === Node.ELEMENT_NODE && node.tagName === "SCRIPT")) {
-      document.head.appendChild(document.importNode(node, true));
-    }
-  });
-
-  // Copia o conteúdo visual do painel sem executar scripts automaticamente.
-  Array.from(parsed.body.childNodes).forEach(node => {
-    if (!(node.nodeType === Node.ELEMENT_NODE && node.tagName === "SCRIPT")) {
-      document.body.appendChild(document.importNode(node, true));
-    }
-  });
-
-  if (parsed.title) {
-    document.title = parsed.title;
-  }
-
-  // Executa cada script na ordem original.
-  for (const item of originalScripts) {
-    await new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-
-      for (const [name, value] of item.attrs) {
-        script.setAttribute(name, value);
-      }
-
-      if (item.src) {
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error("Falha ao carregar: " + item.src));
-      } else {
-        script.textContent = item.text;
-      }
-
-      (item.inHead ? document.head : document.body).appendChild(script);
-
-      if (!item.src) {
-        resolve();
-      }
-    });
-  }
-}
-
 document.getElementById("login").addEventListener("submit",async(e)=>{
   e.preventDefault();
   const user=document.getElementById("user").value;
@@ -134,11 +66,9 @@ document.getElementById("login").addEventListener("submit",async(e)=>{
   try {
     if((await sha256(user))!==USER_HASH) throw new Error("invalid");
     const page=await decryptPage(pass);
-
-    // Injeta o painel descriptografado sem usar document.write().
-    // Isso é importante no GitHub Pages porque o painel depende de
-    // bibliotecas externas (XLSX e Chart.js) e de scripts próprios.
-    await mountDecryptedPage(page);
+    document.open();
+    document.write(page);
+    document.close();
   } catch(_) {
     err.textContent="Usuário ou senha inválidos.";
     document.getElementById("pass").value="";
