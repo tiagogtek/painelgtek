@@ -787,12 +787,12 @@ loadEmbedded();
 </script>
 
 
-<!-- Proteção do Indicador 6: exige senha 123456 a cada abertura do painel -->
+<!-- Proteção do Indicador 6: exige senha a cada abertura do painel -->
 <div id="senhaIndicador6Modal" aria-hidden="true">
   <div class="senha-box" role="dialog" aria-modal="true" aria-labelledby="senhaIndicador6Titulo">
     <h3 id="senhaIndicador6Titulo">🔒 Indicador 6 protegido</h3>
     <p>Digite a senha para visualizar o Comparativo por Responsável.</p>
-    <input id="senhaIndicador6Input" type="password" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="Digite a senha">
+    <input id="senhaIndicador6Input" type="password" inputmode="text" autocomplete="off" maxlength="50" placeholder="Digite a senha">
     <div id="senhaIndicador6Erro"></div>
     <div class="senha-actions">
       <button type="button" id="senhaIndicador6Cancelar">Cancelar</button>
@@ -803,7 +803,16 @@ loadEmbedded();
 <script id="protecao-indicador-6-script">
 (function(){
   'use strict';
-  var SENHA_INDICADOR_6 = '123456';
+  // A senha não é armazenada em texto puro no HTML.
+  var SENHA_INDICADOR_6_HASH = '1fdd2aab7035aada9d16e40d84ee9dd20a08b6307fcc4234748da65c88546495';
+
+  async function hashSenhaIndicador6(senha){
+    var dados = new TextEncoder().encode(senha);
+    var buffer = await crypto.subtle.digest('SHA-256', dados);
+    return Array.from(new Uint8Array(buffer))
+      .map(function(b){ return b.toString(16).padStart(2, '0'); })
+      .join('');
+  }
   var unlocked = false;
   var pendingScroll = false;
 
@@ -857,18 +866,24 @@ loadEmbedded();
     }
   }
 
-  function verificarSenha(){
+  async function verificarSenha(){
     var input=document.getElementById('senhaIndicador6Input');
     var erro=document.getElementById('senhaIndicador6Erro');
     var valor=input ? input.value : '';
-    if(valor===SENHA_INDICADOR_6){
-      liberarIndicador6();
-    }else{
-      if(erro) erro.textContent='Senha incorreta.';
-      if(input){
-        input.value='';
-        input.focus();
+    try{
+      var hash=await hashSenhaIndicador6(valor);
+      if(hash===SENHA_INDICADOR_6_HASH){
+        liberarIndicador6();
+      }else{
+        if(erro) erro.textContent='Senha incorreta.';
+        if(input){
+          input.value='';
+          input.focus();
+        }
       }
+    }catch(e){
+      console.error(e);
+      if(erro) erro.textContent='Não foi possível validar a senha.';
     }
   }
 
