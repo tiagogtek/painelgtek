@@ -126,73 +126,6 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
   }
 </style>
 
-
-<style id="protecao-indicador-6">
-/* Proteção do Indicador 6 - Comparativo por Responsável */
-#responsaveis.indicador6-bloqueado,
-#responsaveis.indicador6-bloqueado + .panel {
-  display: none !important;
-}
-#senhaIndicador6Modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:999999;
-  background:rgba(0,0,0,.82);
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-#senhaIndicador6Modal .senha-box {
-  width:min(420px,100%);
-  background:#111;
-  border:1px solid #444;
-  border-radius:14px;
-  padding:26px;
-  box-shadow:0 20px 70px rgba(0,0,0,.7);
-  color:#f1f5f9;
-}
-#senhaIndicador6Modal h3 { margin:0 0 8px; font-size:20px; }
-#senhaIndicador6Modal p { margin:0 0 18px; color:#aaa; }
-#senhaIndicador6Modal input {
-  width:100%;
-  padding:12px 14px;
-  border-radius:8px;
-  border:1px solid #555;
-  background:#080808;
-  color:#fff;
-  font-size:18px;
-  outline:none;
-  box-sizing:border-box;
-}
-#senhaIndicador6Modal input:focus { border-color:#f97316; }
-#senhaIndicador6Modal .senha-actions {
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-  margin-top:16px;
-}
-#senhaIndicador6Modal button {
-  padding:10px 16px;
-  border-radius:8px;
-  border:1px solid #555;
-  background:#222;
-  color:#fff;
-  cursor:pointer;
-}
-#senhaIndicador6Modal button.confirmar {
-  background:#f97316;
-  border-color:#f97316;
-  font-weight:700;
-}
-#senhaIndicador6Erro {
-  color:#ef4444;
-  font-size:13px;
-  min-height:18px;
-  margin-top:8px;
-}
-</style>
-
 <style id="painel-lock-style">
 .conteudo-protegido{
   position:relative;
@@ -428,6 +361,40 @@ body{
 }
 </style>
 
+
+<style id="ajuste-detalhe-dia-v12">
+/* 1.4 — organiza o detalhe do dia abaixo do detalhamento diário */
+#indicadores ~ #detalhamentos .content{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:14px !important;
+}
+#indicadores ~ #detalhamentos .chartpanel{
+  height:auto !important;
+  min-height:0 !important;
+}
+#indicadores ~ #detalhamentos .chartwrap{
+  height:320px !important;
+  min-height:260px !important;
+}
+#indicadores ~ #detalhamentos .detail{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+}
+#indicadores ~ #detalhamentos .detail .tablewrap{
+  height:auto !important;
+  max-height:360px !important;
+  overflow:auto !important;
+}
+#indicadores ~ #detalhamentos .detail table{
+  width:100% !important;
+}
+@media(max-width:850px){
+  #indicadores ~ #detalhamentos .chartwrap{height:280px !important;}
+}
+</style>
+
 </head>
 <body>
 
@@ -562,7 +529,7 @@ body{
       <div><label>Seleção rápida</label><div class="days" id="dayButtons"><button class="daybtn active" onclick="setDay(0)">01</button><button class="daybtn " onclick="setDay(1)">02</button><button class="daybtn " onclick="setDay(2)">03</button><button class="daybtn " onclick="setDay(3)">04</button><button class="daybtn " onclick="setDay(4)">08</button><button class="daybtn " onclick="setDay(5)">09</button></div></div>
     </div>
     <div class="content">
-      <div class="panel chartpanel"><h2 id="chartMetricName">INSATISFAÇÃO FONE - GTEK</h2><div class="chartwrap"><canvas id="chart" width="674" height="270" style="display: block; box-sizing: border-box; height: 270px; width: 674px;"></canvas></div></div>
+      <div class="panel chartpanel"><h2 id="chartMetricName">INSATISFAÇÃO FONE - GTEK</h2><div class="chartwrap"><canvas id="chart" width="958" height="320" style="display: block; box-sizing: border-box; height: 320px; width: 958px;"></canvas></div></div>
       <div class="panel detail"><h2>Detalhe do dia <span id="selectedDate">01/09/2026</span></h2><div class="tablewrap"><table><thead><tr><th>#</th><th>Indicador</th><th>Meta</th><th>Realizado</th><th>Situação</th></tr></thead><tbody id="detailBody"><tr><td>1</td><td>INSATISFAÇÃO FONE - GTEK</td><td>2,00%</td><td>0,00%</td><td class="good">✓ Dentro da meta</td></tr><tr><td>2</td><td>INSATISFAÇÃO WEB - GTEK</td><td>4,00%</td><td>7,69%</td><td class="bad">✕ Fora da meta</td></tr><tr><td>3</td><td>LIGAÇÕES ABANDONADAS - GTEK</td><td>10,00%</td><td>1,83%</td><td class="good">✓ Dentro da meta</td></tr><tr><td>4</td><td>TEMPO MÁXIMO DE ESPERA - GTEK - FOLHA</td><td>80,00%</td><td>98,28%</td><td class="good">✓ Dentro da meta</td></tr><tr><td>5</td><td>TEMPO MÁXIMO DE ESPERA - GTEK - FISCONT</td><td>80,00%</td><td>100,00%</td><td class="good">✓ Dentro da meta</td></tr><tr><td>6</td><td>TEMPO MÁXIMO DE ESPERA - GTEK - Át</td><td>80,00%</td><td>100,00%</td><td class="good">✓ Dentro da meta</td></tr><tr><td>7</td><td>TEMPO MÉDIO DE ESPERA - GTEK - FOLHA</td><td>2:00</td><td>0:18</td><td class="good">✓ Dentro da meta</td></tr><tr><td>8</td><td>TEMPO MÉDIO DE ESPERA - GTEK - FISCONT</td><td>2:00</td><td>0:09</td><td class="good">✓ Dentro da meta</td></tr><tr><td>9</td><td>TEMPO MÉDIO DE ESPERA - GTEK - ÁREA TÉC</td><td>2:00</td><td>0:11</td><td class="good">✓ Dentro da meta</td></tr></tbody></table></div></div>
     </div>
   </div>
@@ -615,8 +582,8 @@ body{
     </div>
   </div>
 
-  <div class="section indicador6-bloqueado" id="responsaveis">1.6 <span>Comparativo por Responsável</span></div>
-  <div class="panel indicador6-painel-bloqueado">
+  <div class="section" id="responsaveis">1.6 <span>Comparativo por Responsável</span></div>
+  <div class="panel">
     <div class="dailybar">
       <div class="field"><label>Responsável</label><select id="recxSelect" class="btn" style="min-width:330px"><option value="0">Bruna Padilha</option><option value="1">Calusa Grendene Maculan</option><option value="2">Daniel Felin</option><option value="3">Fabio Prates Pereira</option><option value="4">Fernanda Maria dos Santos</option><option value="5">Fernanda Rosa Guedes</option><option value="6">Franciele Silva</option><option value="7">Gabriel Brum Sturza</option><option value="8">Joao Matheus Bertoncello</option><option value="9">Karla Monteiro Saldanha</option><option value="10">Pamela Baggio</option><option value="11">Paola Flores Raimundo</option><option value="12">Rhafael Medeiros Casceres</option><option value="13">Thais Rodrigues da Silva</option><option value="14">Evelin Cristina Rockenbach</option><option value="15">Isadora de Nardin</option><option value="16">Rafael Neves Calil</option><option value="17">Maico Aires da Silveira</option><option value="18">Pablissio Lopes da Silva</option><option value="19">Luan Costa Cezimbra Silveira</option><option value="20">Felipe Panizzon da Silva</option><option value="21">Vicente Cunha</option><option value="22">Eviany Maidana</option><option value="23">Daniela Santos</option><option value="24">Thayna Vieira</option><option value="25">Thais Gomez da Rosa</option><option value="26">Morgana Castilhos</option><option value="27">Nadiny Righi da Silva</option><option value="28">Ana Paula Barbieri</option><option value="29">Lurian Kezia Machado Baal</option><option value="30">Leonardo Lima Adamy</option><option value="31">Dion Marcos Cerezer Schutz</option><option value="32">Eduardo Tietz</option><option value="33">Tiago Scotti dos Santos</option><option value="34">Tiago Medeiros da Rosa</option><option value="35">Retorno</option><option value="36">Atendidas</option></select></div>
     </div>
@@ -625,7 +592,7 @@ body{
       <div class="insat-title">Insatisfação — valores informados na aba “recxreg”</div>
       <div class="recx-values" id="insatValues"><div class="recx-value"><div class="lbl">Insatisfação Fone</div><div class="num">0,00%</div></div><div class="recx-value"><div class="lbl">Insatisfação WEB</div><div class="num">0,00%</div></div></div>
     </div>
-    <div style="height:330px"><canvas id="recxChart" width="0" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas></div>
+    <div style="height:330px"><canvas id="recxChart" width="660" height="330" style="display: block; box-sizing: border-box; height: 330px; width: 660px;"></canvas></div>
   </div>
 
   <div class="footer">
@@ -1195,166 +1162,6 @@ document.getElementById('publishGithubBtn').onclick=async()=>{
 loadEmbedded();
 </script>
 
-
-<!-- Proteção do Indicador 6: exige senha a cada abertura do painel -->
-<div id="senhaIndicador6Modal" aria-hidden="true">
-  <div class="senha-box" role="dialog" aria-modal="true" aria-labelledby="senhaIndicador6Titulo">
-    <h3 id="senhaIndicador6Titulo">🔒 Indicador 6 protegido</h3>
-    <p>Digite a senha para visualizar o Comparativo por Responsável.</p>
-    <input id="senhaIndicador6Input" type="password" inputmode="text" autocomplete="off" maxlength="50" placeholder="Digite a senha">
-    <div id="senhaIndicador6Erro"></div>
-    <div class="senha-actions">
-      <button type="button" id="senhaIndicador6Cancelar">Cancelar</button>
-      <button type="button" class="confirmar" id="senhaIndicador6Confirmar">Acessar</button>
-    </div>
-  </div>
-</div>
-<script id="protecao-indicador-6-script">
-(function(){
-  'use strict';
-  // A senha não é armazenada em texto puro no HTML.
-  var SENHA_INDICADOR_6_HASH = '1fdd2aab7035aada9d16e40d84ee9dd20a08b6307fcc4234748da65c88546495';
-
-  async function hashSenhaIndicador6(senha){
-    var dados = new TextEncoder().encode(senha);
-    var buffer = await crypto.subtle.digest('SHA-256', dados);
-    return Array.from(new Uint8Array(buffer))
-      .map(function(b){ return b.toString(16).padStart(2, '0'); })
-      .join('');
-  }
-  var unlocked = false;
-  var pendingScroll = false;
-
-  function getProtectedElements(){
-    var sec = document.getElementById('responsaveis');
-    if(!sec) return {sec:null, panel:null};
-    return {sec:sec, panel:sec.nextElementSibling};
-  }
-
-  function bloquearIndicador6(){
-    var el = getProtectedElements();
-    if(el.sec) el.sec.classList.add('indicador6-bloqueado');
-    if(el.panel) el.panel.classList.add('indicador6-painel-bloqueado');
-    unlocked = false;
-  }
-
-  function mostrarModal(){
-    var modal=document.getElementById('senhaIndicador6Modal');
-    var input=document.getElementById('senhaIndicador6Input');
-    var erro=document.getElementById('senhaIndicador6Erro');
-    if(!modal || unlocked) return;
-    modal.style.display='flex';
-    modal.setAttribute('aria-hidden','false');
-    if(erro) erro.textContent='';
-    if(input){
-      input.value='';
-      setTimeout(function(){ input.focus(); },50);
-    }
-  }
-
-  function fecharModal(){
-    var modal=document.getElementById('senhaIndicador6Modal');
-    if(modal){
-      modal.style.display='none';
-      modal.setAttribute('aria-hidden','true');
-    }
-  }
-
-  function liberarIndicador6(){
-    var el=getProtectedElements();
-    if(!el.sec) return;
-    el.sec.classList.remove('indicador6-bloqueado');
-    if(el.panel) el.panel.classList.remove('indicador6-painel-bloqueado');
-    unlocked=true;
-    fecharModal();
-    if(pendingScroll){
-      pendingScroll=false;
-      setTimeout(function(){
-        el.sec.scrollIntoView({behavior:'smooth', block:'start'});
-      },50);
-    }
-  }
-
-  async function verificarSenha(){
-    var input=document.getElementById('senhaIndicador6Input');
-    var erro=document.getElementById('senhaIndicador6Erro');
-    var valor=input ? input.value : '';
-    try{
-      var hash=await hashSenhaIndicador6(valor);
-      if(hash===SENHA_INDICADOR_6_HASH){
-        liberarIndicador6();
-      }else{
-        if(erro) erro.textContent='Senha incorreta.';
-        if(input){
-          input.value='';
-          input.focus();
-        }
-      }
-    }catch(e){
-      console.error(e);
-      if(erro) erro.textContent='Não foi possível validar a senha.';
-    }
-  }
-
-  function abrirIndicador6(e){
-    if(e) e.preventDefault();
-    if(unlocked){
-      var el=getProtectedElements();
-      if(el.sec) el.sec.scrollIntoView({behavior:'smooth', block:'start'});
-      return false;
-    }
-    pendingScroll=true;
-    mostrarModal();
-    return false;
-  }
-
-  function inicializarProtecaoIndicador6(){
-    bloquearIndicador6();
-
-    var links=document.querySelectorAll('a[href="#responsaveis"]');
-    links.forEach(function(link){
-      link.addEventListener('click', abrirIndicador6);
-    });
-
-    var btn=document.getElementById('senhaIndicador6Confirmar');
-    var cancelar=document.getElementById('senhaIndicador6Cancelar');
-    var input=document.getElementById('senhaIndicador6Input');
-    var modal=document.getElementById('senhaIndicador6Modal');
-
-    if(btn) btn.addEventListener('click', verificarSenha);
-    if(cancelar) cancelar.addEventListener('click', function(){
-      pendingScroll=false;
-      fecharModal();
-    });
-    if(input) input.addEventListener('keydown', function(e){
-      if(e.key==='Enter') verificarSenha();
-      if(e.key==='Escape'){
-        pendingScroll=false;
-        fecharModal();
-      }
-    });
-    if(modal) modal.addEventListener('click', function(e){
-      if(e.target===modal){
-        pendingScroll=false;
-        fecharModal();
-      }
-    });
-
-    // Impede acesso direto por #responsaveis sem senha.
-    if(window.location.hash==='#responsaveis'){
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-      setTimeout(mostrarModal, 100);
-    }
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', inicializarProtecaoIndicador6);
-  }else{
-    inicializarProtecaoIndicador6();
-  }
-})();
-</script>
-
 <script id="painel-lock-script">
 (function(){
   "use strict";
@@ -1422,26 +1229,11 @@ loadEmbedded();
 <script id="painel-nav-unico-script">
 (function(){
   "use strict";
-  function autenticarUmaVez(){
-    return sessionStorage.getItem("gtekPainelAutenticado") === "1";
-  }
-
+  const AUTH_KEY = "gtekPainelAutenticado";
   document.addEventListener("click", function(e){
-    const link = e.target.closest && e.target.closest(
-      '#conteudoProtegido ~ * a[href="#responsaveis"], ' +
-      '.nav-subitems a[href="#numeros-acumulados"], ' +
-      '.nav-subitems a[href="#indicadores-ssc"], ' +
-      '.nav-subitems a[href="#dados-central"], ' +
-      '.nav-subitems a[href="#indicadores"], ' +
-      '.nav-subitems a[href="#atendimentos"], ' +
-      '.nav-subitems a[href="#responsaveis"], ' +
-      '.nav-subitems a[href="#n2-geral"]'
-    );
-
-    if(link && autenticarUmaVez()){
-      // A autenticação já foi feita; não interceptar nem solicitar senha novamente.
-      return true;
-    }
+    const link = e.target.closest && e.target.closest(".nav-subitems a.item-protegido");
+    if(!link) return;
+    if(sessionStorage.getItem(AUTH_KEY) === "1") return; // single shared authentication
   }, true);
 })();
 </script>
