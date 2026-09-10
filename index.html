@@ -108,6 +108,73 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
   }
 </style>
 
+
+<style id="protecao-indicador-6">
+/* Proteção do Indicador 6 - Comparativo por Responsável */
+#responsaveis.indicador6-bloqueado,
+#responsaveis.indicador6-bloqueado + .panel {
+  display: none !important;
+}
+#senhaIndicador6Modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background:rgba(0,0,0,.82);
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+#senhaIndicador6Modal .senha-box {
+  width:min(420px,100%);
+  background:#111;
+  border:1px solid #444;
+  border-radius:14px;
+  padding:26px;
+  box-shadow:0 20px 70px rgba(0,0,0,.7);
+  color:#f1f5f9;
+}
+#senhaIndicador6Modal h3 { margin:0 0 8px; font-size:20px; }
+#senhaIndicador6Modal p { margin:0 0 18px; color:#aaa; }
+#senhaIndicador6Modal input {
+  width:100%;
+  padding:12px 14px;
+  border-radius:8px;
+  border:1px solid #555;
+  background:#080808;
+  color:#fff;
+  font-size:18px;
+  outline:none;
+  box-sizing:border-box;
+}
+#senhaIndicador6Modal input:focus { border-color:#f97316; }
+#senhaIndicador6Modal .senha-actions {
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  margin-top:16px;
+}
+#senhaIndicador6Modal button {
+  padding:10px 16px;
+  border-radius:8px;
+  border:1px solid #555;
+  background:#222;
+  color:#fff;
+  cursor:pointer;
+}
+#senhaIndicador6Modal button.confirmar {
+  background:#f97316;
+  border-color:#f97316;
+  font-weight:700;
+}
+#senhaIndicador6Erro {
+  color:#ef4444;
+  font-size:13px;
+  min-height:18px;
+  margin-top:8px;
+}
+</style>
+
 </head>
 <body>
 <div class="wrap">
@@ -232,8 +299,8 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
   <div class="section" id="atendimentos">5. <span>Atendimentos — origem principal</span></div>
   <div id="dashboard"><div class="kpi-grid" id="kpiGrid"><div class="kpi" style="--accent-color:#f97316"><div class="label">Recebidas (Fone)</div><div class="value">118.566</div></div><div class="kpi" style="--accent-color:#34d399"><div class="label">Atendidas (Fone)</div><div class="value">105.559</div></div><div class="kpi" style="--accent-color:#f87171"><div class="label">Abandonadas (Fone)</div><div class="value">13.007</div></div><div class="kpi" style="--accent-color:#fbbf24"><div class="label">Registradas</div><div class="value">82.221</div></div><div class="kpi" style="--accent-color:#a78bfa"><div class="label">Web (Qtd)</div><div class="value">22.607</div></div><div class="kpi" style="--accent-color:#f97316"><div class="label">% Atendimento médio</div><div class="value">89,03%</div></div></div><div class="grid"><div class="card"><h3 id="trendTitle">Evolução mensal — Recebidas × Atendidas × Abandonadas × Registradas × Web (Qtd) × % Atendimento</h3><canvas id="trendChart" width="702" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 702px;"></canvas></div><div class="card"><h3>Composição do atendimento (Fone)</h3><canvas id="donutChart" width="329" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 329px;"></canvas><div class="hint">Soma dos anos selecionados</div></div></div><div class="row2"><div class="card"><h3 id="compareTitle">Comparativo anual — Recebidas × Atendidas × Abandonadas × Registradas</h3><canvas id="yearBarChart" width="516" height="258" style="display: block; box-sizing: border-box; height: 258px; width: 516px;"></canvas></div><div class="card"><h3>% de Atendimento por ano (média mensal)</h3><canvas id="pctLineChart" width="516" height="258" style="display: block; box-sizing: border-box; height: 258px; width: 516px;"></canvas></div></div><div class="card" style="margin-top:15px"><h3 id="monthlyCompareTitle">Comparativo mensal — 2026</h3><canvas id="monthlyCompareChart" width="1062" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 1062px;"></canvas></div><div class="card" style="margin-top:15px;margin-bottom:10px"><h3>Detalhe mensal (anos selecionados)</h3><div style="overflow:auto"><table id="detailTable"><thead><tr><th>Mês</th><th>Ano</th><th>Recebidas</th><th>Atendidas</th><th>Abandonadas</th><th>Registradas</th><th>% Atend.</th><th>Web Qtd</th></tr></thead><tbody><tr><td>Jan</td><td>2025</td><td>6.121</td><td>5.584</td><td>537</td><td>3.885</td><td>69,57%</td><td>1.179</td></tr><tr><td>Fev</td><td>2025</td><td>8.432</td><td>7.312</td><td>1.120</td><td>4.466</td><td>61,08%</td><td>1.460</td></tr><tr><td>Mar</td><td>2025</td><td>6.635</td><td>5.775</td><td>860</td><td>3.542</td><td>61,33%</td><td>1.123</td></tr><tr><td>Abr</td><td>2025</td><td>5.164</td><td>4.892</td><td>272</td><td>3.557</td><td>72,71%</td><td>971</td></tr><tr><td>Mai</td><td>2025</td><td>4.575</td><td>4.386</td><td>189</td><td>3.403</td><td>77,59%</td><td>898</td></tr><tr><td>Jun</td><td>2025</td><td>5.897</td><td>5.512</td><td>385</td><td>3.771</td><td>68,41%</td><td>1.001</td></tr><tr><td>Jul</td><td>2025</td><td>6.781</td><td>6.284</td><td>497</td><td>4.490</td><td>71,45%</td><td>1.626</td></tr><tr><td>Ago</td><td>2025</td><td>4.901</td><td>4.463</td><td>438</td><td>3.594</td><td>80,53%</td><td>971</td></tr><tr><td>Set</td><td>2025</td><td>4.464</td><td>4.131</td><td>333</td><td>3.774</td><td>91,36%</td><td>948</td></tr><tr><td>Out</td><td>2025</td><td>4.533</td><td>4.331</td><td>202</td><td>4.104</td><td>94,76%</td><td>1.045</td></tr><tr><td>Nov</td><td>2025</td><td>4.019</td><td>3.749</td><td>270</td><td>3.640</td><td>97,09%</td><td>860</td></tr><tr><td>Dez</td><td>2025</td><td>4.753</td><td>4.315</td><td>438</td><td>3.845</td><td>89,11%</td><td>853</td></tr><tr><td>Jan</td><td>2026</td><td>5.366</td><td>4.913</td><td>453</td><td>4.614</td><td>93,91%</td><td>1.048</td></tr><tr><td>Fev</td><td>2026</td><td>9.645</td><td>7.549</td><td>2.096</td><td>4.547</td><td>60,23%</td><td>1.635</td></tr><tr><td>Mar</td><td>2026</td><td>8.425</td><td>6.581</td><td>1.844</td><td>4.649</td><td>70,64%</td><td>1.263</td></tr><tr><td>Abr</td><td>2026</td><td>6.809</td><td>5.627</td><td>1.182</td><td>4.180</td><td>74,28%</td><td>1.085</td></tr><tr><td>Mai</td><td>2026</td><td>5.738</td><td>4.774</td><td>964</td><td>3.788</td><td>79,35%</td><td>1.079</td></tr><tr><td>Jun</td><td>2026</td><td>5.693</td><td>5.357</td><td>336</td><td>5.145</td><td>96,04%</td><td>1.231</td></tr><tr><td>Jul</td><td>2026</td><td>6.027</td><td>5.667</td><td>360</td><td>5.198</td><td>91,72%</td><td>1.318</td></tr><tr><td>Ago</td><td>2026</td><td>4.588</td><td>4.357</td><td>231</td><td>4.029</td><td>92,47%</td><td>1.013</td></tr><tr><td>Set</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Out</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Nov</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Dez</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td colspan="2"><b>TOTAL</b></td><td><b>118.566</b></td><td><b>105.559</b></td><td><b>13.007</b></td><td><b>82.221</b></td><td><b>1</b></td><td><b>22.607</b></td></tr></tbody></table></div></div></div>
 
-  <div class="section" id="responsaveis">6. <span>Comparativo por Responsável</span></div>
-  <div class="panel">
+  <div class="section indicador6-bloqueado" id="responsaveis">6. <span>Comparativo por Responsável</span></div>
+  <div class="panel indicador6-painel-bloqueado">
     <div class="dailybar">
       <div class="field"><label>Responsável</label><select id="recxSelect" class="btn" style="min-width:330px"><option value="0">Bruna Padilha</option><option value="1">Calusa Grendene Maculan</option><option value="2">Daniel Felin</option><option value="3">Fabio Prates Pereira</option><option value="4">Fernanda Maria dos Santos</option><option value="5">Fernanda Rosa Guedes</option><option value="6">Franciele Silva</option><option value="7">Gabriel Brum Sturza</option><option value="8">Joao Matheus Bertoncello</option><option value="9">Karla Monteiro Saldanha</option><option value="10">Pamela Baggio</option><option value="11">Paola Flores Raimundo</option><option value="12">Rhafael Medeiros Casceres</option><option value="13">Thais Rodrigues da Silva</option><option value="14">Evelin Cristina Rockenbach</option><option value="15">Isadora de Nardin</option><option value="16">Rafael Neves Calil</option><option value="17">Maico Aires da Silveira</option><option value="18">Pablissio Lopes da Silva</option><option value="19">Luan Costa Cezimbra Silveira</option><option value="20">Felipe Panizzon da Silva</option><option value="21">Vicente Cunha</option><option value="22">Eviany Maidana</option><option value="23">Daniela Santos</option><option value="24">Thayna Vieira</option><option value="25">Thais Gomez da Rosa</option><option value="26">Morgana Castilhos</option><option value="27">Nadiny Righi da Silva</option><option value="28">Ana Paula Barbieri</option><option value="29">Lurian Kezia Machado Baal</option><option value="30">Leonardo Lima Adamy</option><option value="31">Dion Marcos Cerezer Schutz</option><option value="32">Eduardo Tietz</option><option value="33">Tiago Scotti dos Santos</option><option value="34">Tiago Medeiros da Rosa</option><option value="35">Retorno</option><option value="36">Atendidas</option></select></div>
     </div>
@@ -242,7 +309,7 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
       <div class="insat-title">Insatisfação — valores informados na aba “recxreg”</div>
       <div class="recx-values" id="insatValues"><div class="recx-value"><div class="lbl">Insatisfação Fone</div><div class="num">0,00%</div></div><div class="recx-value"><div class="lbl">Insatisfação WEB</div><div class="num">0,00%</div></div></div>
     </div>
-    <div style="height:330px"><canvas id="recxChart" width="660" height="330" style="display: block; box-sizing: border-box; height: 330px; width: 660px;"></canvas></div>
+    <div style="height:330px"><canvas id="recxChart" width="0" height="0" style="display: block; box-sizing: border-box; height: 0px; width: 0px;"></canvas></div>
   </div>
 
   <div class="footer">
@@ -717,6 +784,151 @@ document.getElementById('publishGithubBtn').onclick=async()=>{
 };
 
 loadEmbedded();
+</script>
+
+
+<!-- Proteção do Indicador 6: exige senha 123456 a cada abertura do painel -->
+<div id="senhaIndicador6Modal" aria-hidden="true">
+  <div class="senha-box" role="dialog" aria-modal="true" aria-labelledby="senhaIndicador6Titulo">
+    <h3 id="senhaIndicador6Titulo">🔒 Indicador 6 protegido</h3>
+    <p>Digite a senha para visualizar o Comparativo por Responsável.</p>
+    <input id="senhaIndicador6Input" type="password" inputmode="numeric" autocomplete="off" maxlength="20" placeholder="Digite a senha">
+    <div id="senhaIndicador6Erro"></div>
+    <div class="senha-actions">
+      <button type="button" id="senhaIndicador6Cancelar">Cancelar</button>
+      <button type="button" class="confirmar" id="senhaIndicador6Confirmar">Acessar</button>
+    </div>
+  </div>
+</div>
+<script id="protecao-indicador-6-script">
+(function(){
+  'use strict';
+  var SENHA_INDICADOR_6 = '123456';
+  var unlocked = false;
+  var pendingScroll = false;
+
+  function getProtectedElements(){
+    var sec = document.getElementById('responsaveis');
+    if(!sec) return {sec:null, panel:null};
+    return {sec:sec, panel:sec.nextElementSibling};
+  }
+
+  function bloquearIndicador6(){
+    var el = getProtectedElements();
+    if(el.sec) el.sec.classList.add('indicador6-bloqueado');
+    if(el.panel) el.panel.classList.add('indicador6-painel-bloqueado');
+    unlocked = false;
+  }
+
+  function mostrarModal(){
+    var modal=document.getElementById('senhaIndicador6Modal');
+    var input=document.getElementById('senhaIndicador6Input');
+    var erro=document.getElementById('senhaIndicador6Erro');
+    if(!modal || unlocked) return;
+    modal.style.display='flex';
+    modal.setAttribute('aria-hidden','false');
+    if(erro) erro.textContent='';
+    if(input){
+      input.value='';
+      setTimeout(function(){ input.focus(); },50);
+    }
+  }
+
+  function fecharModal(){
+    var modal=document.getElementById('senhaIndicador6Modal');
+    if(modal){
+      modal.style.display='none';
+      modal.setAttribute('aria-hidden','true');
+    }
+  }
+
+  function liberarIndicador6(){
+    var el=getProtectedElements();
+    if(!el.sec) return;
+    el.sec.classList.remove('indicador6-bloqueado');
+    if(el.panel) el.panel.classList.remove('indicador6-painel-bloqueado');
+    unlocked=true;
+    fecharModal();
+    if(pendingScroll){
+      pendingScroll=false;
+      setTimeout(function(){
+        el.sec.scrollIntoView({behavior:'smooth', block:'start'});
+      },50);
+    }
+  }
+
+  function verificarSenha(){
+    var input=document.getElementById('senhaIndicador6Input');
+    var erro=document.getElementById('senhaIndicador6Erro');
+    var valor=input ? input.value : '';
+    if(valor===SENHA_INDICADOR_6){
+      liberarIndicador6();
+    }else{
+      if(erro) erro.textContent='Senha incorreta.';
+      if(input){
+        input.value='';
+        input.focus();
+      }
+    }
+  }
+
+  function abrirIndicador6(e){
+    if(e) e.preventDefault();
+    if(unlocked){
+      var el=getProtectedElements();
+      if(el.sec) el.sec.scrollIntoView({behavior:'smooth', block:'start'});
+      return false;
+    }
+    pendingScroll=true;
+    mostrarModal();
+    return false;
+  }
+
+  function inicializarProtecaoIndicador6(){
+    bloquearIndicador6();
+
+    var links=document.querySelectorAll('a[href="#responsaveis"]');
+    links.forEach(function(link){
+      link.addEventListener('click', abrirIndicador6);
+    });
+
+    var btn=document.getElementById('senhaIndicador6Confirmar');
+    var cancelar=document.getElementById('senhaIndicador6Cancelar');
+    var input=document.getElementById('senhaIndicador6Input');
+    var modal=document.getElementById('senhaIndicador6Modal');
+
+    if(btn) btn.addEventListener('click', verificarSenha);
+    if(cancelar) cancelar.addEventListener('click', function(){
+      pendingScroll=false;
+      fecharModal();
+    });
+    if(input) input.addEventListener('keydown', function(e){
+      if(e.key==='Enter') verificarSenha();
+      if(e.key==='Escape'){
+        pendingScroll=false;
+        fecharModal();
+      }
+    });
+    if(modal) modal.addEventListener('click', function(e){
+      if(e.target===modal){
+        pendingScroll=false;
+        fecharModal();
+      }
+    });
+
+    // Impede acesso direto por #responsaveis sem senha.
+    if(window.location.hash==='#responsaveis'){
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      setTimeout(mostrarModal, 100);
+    }
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', inicializarProtecaoIndicador6);
+  }else{
+    inicializarProtecaoIndicador6();
+  }
+})();
 </script>
 
 </body></html>
