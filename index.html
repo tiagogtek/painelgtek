@@ -59,6 +59,12 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
 .nav a{display:flex;align-items:center;gap:9px;padding:10px 9px;border-radius:7px;color:#d1d5db;text-decoration:none;font-size:12px;font-weight:600;border:1px solid transparent}
 .nav a:hover,.nav a.active{background:linear-gradient(90deg,#f97316,#ea580c);color:#fff;border-color:#fb923c}
 .nav .ico{width:17px;text-align:center;font-size:15px}
+
+.nav-subitems{display:flex;flex-direction:column;gap:2px;margin:0 0 3px 20px;padding-left:7px;border-left:1px solid #303030}
+.nav-subitems a{font-size:11px;padding:7px 6px;gap:7px;border-radius:6px}
+.nav-subitems .nav-index{width:28px;flex-basis:28px;font-size:9px}
+.nav-subitems .ico{width:14px;font-size:13px}
+.nav-parent{margin-bottom:1px}
 .sidebar-info{margin-top:auto;padding:10px 5px 3px;color:#a3a3a3;font-size:10px;line-height:1.45;border-top:1px solid #272727}
 .sidebar-info strong{display:block;color:var(--lime);font-size:11px;margin-top:3px;word-break:break-word}
 .main{min-width:0}
@@ -187,20 +193,84 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
 }
 </style>
 
+<style id="painel-lock-style">
+.conteudo-protegido{
+  position:relative;
+  min-height:320px;
+}
+.conteudo-protegido.conteudo-liberado .conteudo-bloqueado-overlay{
+  display:none;
+}
+.conteudo-bloqueado-overlay{
+  position:absolute;
+  z-index:1000;
+  inset:0;
+  min-height:100%;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:70px 20px 120px;
+  box-sizing:border-box;
+  background:rgba(8,12,20,.93);
+  backdrop-filter:blur(5px);
+}
+.protecao-card{
+  width:min(410px,calc(100% - 20px));
+  padding:32px 30px 28px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:16px;
+  background:#151922;
+  box-shadow:0 24px 70px rgba(0,0,0,.5);
+  text-align:center;
+}
+.protecao-icon{font-size:36px;margin-bottom:8px}
+.protecao-card h2{margin:0 0 8px;font-size:22px}
+.protecao-card p{margin:0 0 20px;opacity:.75;font-size:14px;line-height:1.5}
+#painelPassword{
+  width:100%;box-sizing:border-box;
+  padding:12px 14px;margin-bottom:12px;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:8px;background:#0e1219;color:#fff;
+  outline:none;font-size:15px;
+}
+#painelPassword:focus{border-color:#6b8cff}
+#painelLoginBtn{
+  width:100%;padding:12px 14px;
+  border:0;border-radius:8px;
+  background:#3568e8;color:#fff;
+  cursor:pointer;font-weight:600;font-size:15px;
+}
+#painelLoginBtn:hover{filter:brightness(1.08)}
+.painel-login-error{display:none;color:#ff6b6b;font-size:13px;margin-top:12px}
+.painel-login-error.show{display:block}
+.nav-subitems a.item-protegido:after{
+  content:"🔒";
+  margin-left:auto;
+  font-size:10px;
+  opacity:.7;
+}
+</style>
+
 </head>
 <body>
+
+
 <div class="wrap">
 <div class="app-shell">
 <aside class="sidebar">
   
   <div class="index-title">ÍNDICE</div>
   <nav class="nav">
-    <a class="active" href="#visao-geral"><span class="nav-index">1</span><span class="ico">⌂</span>Visão Geral</a>
-    <a href="#indicadores-ssc"><span class="nav-index">2</span><span class="ico">▥</span>Indicadores SSC</a>
-    <a href="#dados-central"><span class="nav-index">3</span><span class="ico">▤</span>Dados Central</a>
-    <a href="#indicadores"><span class="nav-index">4</span><span class="ico">◷</span>Indicadores GTEK</a>
-    <a href="#atendimentos"><span class="nav-index">5</span><span class="ico">◉</span>Atendimentos</a>
-    <a href="#responsaveis"><span class="nav-index">6</span><span class="ico">♙</span>Responsáveis</a>     <a href="#n2-geral"><span class="nav-index">7</span><span class="ico">%</span>% N2 Geral</a>
+    <a class="active nav-parent" href="#visao-geral"><span class="nav-index">1</span><span class="ico">⌂</span>Visão Geral</a>
+    <div class="nav-subitems">
+      <a class="item-protegido" href="#numeros-acumulados"><span class="nav-index">1.1</span><span class="ico">▦</span>Números Acumulados Ano(s)</a>
+      <a class="item-protegido" href="#indicadores-ssc"><span class="nav-index">1.2</span><span class="ico">▥</span>Indicadores SSC</a>
+      <a class="item-protegido" href="#dados-central"><span class="nav-index">1.3</span><span class="ico">▤</span>Dados Central</a>
+      <a class="item-protegido" href="#indicadores"><span class="nav-index">1.4</span><span class="ico">◷</span>Indicadores GTEK</a>
+      <a class="item-protegido" href="#atendimentos"><span class="nav-index">1.5</span><span class="ico">◉</span>Atendimentos</a>
+      <a class="item-protegido" href="#responsaveis"><span class="nav-index">1.6</span><span class="ico">♙</span>Responsáveis</a>
+      <a class="item-protegido" href="#n2-geral"><span class="nav-index">1.7</span><span class="ico">%</span>% N2 Geral</a>
+    </div>
   </nav>
   <div class="sidebar-info"><span id="sideFileName" style="display:none">META.xlsx</span>Atualização local no navegador</div>
 </aside>
@@ -229,7 +299,19 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
     <div><label>Ano comparativo mensal</label><select id="monthCompareYearSelect"><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option></select></div>
   </div>
 
-  <div class="section" id="numeros-acumulados">1. <span>Números Acumulados Ano(s)</span></div>
+  
+<div id="conteudoProtegido" class="conteudo-protegido">
+  <div id="conteudoBloqueadoOverlay" class="conteudo-bloqueado-overlay">
+    <div class="protecao-card">
+      <div class="protecao-icon">🔒</div>
+      <h2>Conteúdo protegido</h2>
+      <p>Os indicadores 1.1 a 1.7 estão protegidos.<br>Digite a senha para liberar todos.</p>
+      <input id="painelPassword" type="password" autocomplete="off" placeholder="Digite a senha">
+      <button id="painelLoginBtn" type="button">Liberar indicadores</button>
+      <div id="painelLoginError" class="painel-login-error">Senha incorreta.</div>
+    </div>
+  </div>
+<div class="section" id="numeros-acumulados">1.1 <span>Números Acumulados Ano(s)</span></div>
 <div id="visao-geral" class="summary-strip">
   <div class="summary-card" style="--c:#38bdf8"><div class="s-label">Recebidas</div><div class="s-value" id="sumRec">118.566</div><div class="s-note">Total no mês</div></div>
   <div class="summary-card" style="--c:#34d399"><div class="s-label">Atendidas</div><div class="s-value" id="sumAtd">105.559</div><div class="s-note">Total no mês</div></div>
@@ -239,7 +321,7 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
   <div class="summary-card" style="--c:#f43f5e"><div class="s-label">% Atendimento</div><div class="s-value" id="sumPct">89,03%</div><div class="s-note">Média do período</div></div>
 </div>
 <div id="sscSection" class="ssc-panel-section">
-  <div class="section" id="indicadores-ssc">2. <span>Indicadores SSC</span></div>
+  <div class="section" id="indicadores-ssc">1.2 <span>Indicadores SSC</span></div>
   <div class="ssc-panels" id="sscPanels">
     <div class="ssc-panel" style="--c:#38bdf8">
       <div class="ssc-label">ssc fone</div>
@@ -276,7 +358,7 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
       <div class="ssc-value">318</div>
     </div>
   </div>
-     <div class="section" id="dados-central">3. <span>Dados Central</span></div>
+     <div class="section" id="dados-central">1.3 <span>Dados Central</span></div>
      <div class="ssc-panels ssc-panels-secondary" id="sscPanels1922"><div class="ssc-panel">
       <div class="ssc-label">Atendidas</div>
       <div class="ssc-value">1.486</div>
@@ -291,7 +373,7 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
       <div class="ssc-value">4,44%</div>
     </div></div>
 </div>
-<div class="section" id="indicadores">4. <span>Indicadores GTEK</span> — competência <span id="periodLabel">SETEMBRO DE 2026</span></div>
+<div class="section" id="indicadores">1.4 <span>Indicadores GTEK</span> — competência <span id="periodLabel">SETEMBRO DE 2026</span></div>
   <div class="cards" id="metricCards"><div class="metric-card"><div class="metric-title">INSATISFAÇÃO FONE - GTEK</div><div class="vals"><div><div class="lab">META</div><div class="num">2,00%</div></div><div><div class="lab">ATUAL</div><div class="num good">0,00%</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">INSATISFAÇÃO WEB - GTEK</div><div class="vals"><div><div class="lab">META</div><div class="num">4,00%</div></div><div><div class="lab">ATUAL</div><div class="num good">2,44%</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">LIGAÇÕES ABANDONADAS - GTEK</div><div class="vals"><div><div class="lab">META</div><div class="num">10,00%</div></div><div><div class="lab">ATUAL</div><div class="num good">4,44%</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">TEMPO MÁXIMO DE ESPERA - GTEK - FOLHA</div><div class="vals"><div><div class="lab">META</div><div class="num">80,00%</div></div><div><div class="lab">ATUAL</div><div class="num good">98,69%</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">TEMPO MÁXIMO DE ESPERA - GTEK - FISCONT</div><div class="vals"><div><div class="lab">META</div><div class="num">80,00%</div></div><div><div class="lab">ATUAL</div><div class="num good">97,94%</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">TEMPO MÁXIMO DE ESPERA - GTEK - Át</div><div class="vals"><div><div class="lab">META</div><div class="num">80,00%</div></div><div><div class="lab">ATUAL</div><div class="num good">96,91%</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">TEMPO MÉDIO DE ESPERA - GTEK - FOLHA</div><div class="vals"><div><div class="lab">META</div><div class="num">2:00</div></div><div><div class="lab">ATUAL</div><div class="num good">0:17</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">TEMPO MÉDIO DE ESPERA - GTEK - FISCONT</div><div class="vals"><div><div class="lab">META</div><div class="num">2:00</div></div><div><div class="lab">ATUAL</div><div class="num good">0:18</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div><div class="metric-card"><div class="metric-title">TEMPO MÉDIO DE ESPERA - GTEK - ÁREA TÉC</div><div class="vals"><div><div class="lab">META</div><div class="num">2:00</div></div><div><div class="lab">ATUAL</div><div class="num good">0:23</div></div></div><div class="statusline"><div class="statuslabel">SITUAÇÃO</div><div class="state good"><span class="circle ">✓</span>DENTRO DA META</div></div></div></div>
 
   <div class="panel" id="detalhamentos">
@@ -308,11 +390,11 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
     </div>
   </div>
 
-  <div class="section" id="atendimentos">5. <span>Atendimentos — origem principal</span></div>
+  <div class="section" id="atendimentos">1.5 <span>Atendimentos — origem principal</span></div>
   <div id="dashboard"><div class="kpi-grid" id="kpiGrid"><div class="kpi" style="--accent-color:#f97316"><div class="label">Recebidas (Fone)</div><div class="value">118.566</div></div><div class="kpi" style="--accent-color:#34d399"><div class="label">Atendidas (Fone)</div><div class="value">105.559</div></div><div class="kpi" style="--accent-color:#f87171"><div class="label">Abandonadas (Fone)</div><div class="value">13.007</div></div><div class="kpi" style="--accent-color:#fbbf24"><div class="label">Registradas</div><div class="value">82.221</div></div><div class="kpi" style="--accent-color:#a78bfa"><div class="label">Web (Qtd)</div><div class="value">22.607</div></div><div class="kpi" style="--accent-color:#f97316"><div class="label">% Atendimento médio</div><div class="value">89,03%</div></div></div><div class="grid"><div class="card"><h3 id="trendTitle">Evolução mensal — Recebidas × Atendidas × Abandonadas × Registradas × Web (Qtd)</h3><canvas id="trendChart" width="702" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 702px;"></canvas></div><div class="card"><h3>Composição do atendimento (Fone)</h3><canvas id="donutChart" width="329" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 329px;"></canvas><div class="hint">Soma dos anos selecionados</div></div></div><div class="card" style="margin-top:15px"><h3 id="pctMonthlyTitle">% Registro de atendimentos - evolução mensal</h3><canvas id="pctMonthlyChart" width="1062" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 1062px;"></canvas></div><div class="row2"><div class="card"><h3 id="compareTitle">Comparativo anual — Recebidas × Atendidas × Abandonadas × Registradas</h3><canvas id="yearBarChart" width="516" height="258" style="display: block; box-sizing: border-box; height: 258px; width: 516px;"></canvas></div><div class="card"><h3>% de Atendimento por ano (média mensal)</h3><canvas id="pctLineChart" width="516" height="258" style="display: block; box-sizing: border-box; height: 258px; width: 516px;"></canvas></div></div><div class="card" style="margin-top:15px"><h3 id="monthlyCompareTitle">Comparativo mensal — 2026</h3><canvas id="monthlyCompareChart" width="1062" height="285" style="display: block; box-sizing: border-box; height: 285px; width: 1062px;"></canvas></div><div class="card" style="margin-top:15px;margin-bottom:10px"><h3>Detalhe mensal (anos selecionados)</h3><div style="overflow:auto"><table id="detailTable"><thead><tr><th>Mês</th><th>Ano</th><th>Recebidas</th><th>Atendidas</th><th>Abandonadas</th><th>Registradas</th><th>% Atend.</th><th>Web Qtd</th></tr></thead><tbody><tr><td>Jan</td><td>2025</td><td>6.121</td><td>5.584</td><td>537</td><td>3.885</td><td>69,57%</td><td>1.179</td></tr><tr><td>Fev</td><td>2025</td><td>8.432</td><td>7.312</td><td>1.120</td><td>4.466</td><td>61,08%</td><td>1.460</td></tr><tr><td>Mar</td><td>2025</td><td>6.635</td><td>5.775</td><td>860</td><td>3.542</td><td>61,33%</td><td>1.123</td></tr><tr><td>Abr</td><td>2025</td><td>5.164</td><td>4.892</td><td>272</td><td>3.557</td><td>72,71%</td><td>971</td></tr><tr><td>Mai</td><td>2025</td><td>4.575</td><td>4.386</td><td>189</td><td>3.403</td><td>77,59%</td><td>898</td></tr><tr><td>Jun</td><td>2025</td><td>5.897</td><td>5.512</td><td>385</td><td>3.771</td><td>68,41%</td><td>1.001</td></tr><tr><td>Jul</td><td>2025</td><td>6.781</td><td>6.284</td><td>497</td><td>4.490</td><td>71,45%</td><td>1.626</td></tr><tr><td>Ago</td><td>2025</td><td>4.901</td><td>4.463</td><td>438</td><td>3.594</td><td>80,53%</td><td>971</td></tr><tr><td>Set</td><td>2025</td><td>4.464</td><td>4.131</td><td>333</td><td>3.774</td><td>91,36%</td><td>948</td></tr><tr><td>Out</td><td>2025</td><td>4.533</td><td>4.331</td><td>202</td><td>4.104</td><td>94,76%</td><td>1.045</td></tr><tr><td>Nov</td><td>2025</td><td>4.019</td><td>3.749</td><td>270</td><td>3.640</td><td>97,09%</td><td>860</td></tr><tr><td>Dez</td><td>2025</td><td>4.753</td><td>4.315</td><td>438</td><td>3.845</td><td>89,11%</td><td>853</td></tr><tr><td>Jan</td><td>2026</td><td>5.366</td><td>4.913</td><td>453</td><td>4.614</td><td>93,91%</td><td>1.048</td></tr><tr><td>Fev</td><td>2026</td><td>9.645</td><td>7.549</td><td>2.096</td><td>4.547</td><td>60,23%</td><td>1.635</td></tr><tr><td>Mar</td><td>2026</td><td>8.425</td><td>6.581</td><td>1.844</td><td>4.649</td><td>70,64%</td><td>1.263</td></tr><tr><td>Abr</td><td>2026</td><td>6.809</td><td>5.627</td><td>1.182</td><td>4.180</td><td>74,28%</td><td>1.085</td></tr><tr><td>Mai</td><td>2026</td><td>5.738</td><td>4.774</td><td>964</td><td>3.788</td><td>79,35%</td><td>1.079</td></tr><tr><td>Jun</td><td>2026</td><td>5.693</td><td>5.357</td><td>336</td><td>5.145</td><td>96,04%</td><td>1.231</td></tr><tr><td>Jul</td><td>2026</td><td>6.027</td><td>5.667</td><td>360</td><td>5.198</td><td>91,72%</td><td>1.318</td></tr><tr><td>Ago</td><td>2026</td><td>4.588</td><td>4.357</td><td>231</td><td>4.029</td><td>92,47%</td><td>1.013</td></tr><tr><td>Set</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Out</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Nov</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Dez</td><td>2026</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td colspan="2"><b>TOTAL</b></td><td><b>118.566</b></td><td><b>105.559</b></td><td><b>13.007</b></td><td><b>82.221</b></td><td><b>1</b></td><td><b>22.607</b></td></tr></tbody></table></div></div></div>
 
 
-  <div class="section" id="n2-geral">7. <span>Indicador % N2 Geral</span> — competência <span id="n2GeralPeriod">SETEMBRO DE 2026</span></div>
+  <div class="section" id="n2-geral">1.7 <span>Indicador % N2 Geral</span> — competência <span id="n2GeralPeriod">SETEMBRO DE 2026</span></div>
   <div class="panel">
     <div class="n2geral-layout">
       <div class="card n2geral-chart">
@@ -356,7 +438,7 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
     </div>
   </div>
 
-  <div class="section indicador6-bloqueado" id="responsaveis">6. <span>Comparativo por Responsável</span></div>
+  <div class="section indicador6-bloqueado" id="responsaveis">1.6 <span>Comparativo por Responsável</span></div>
   <div class="panel indicador6-painel-bloqueado">
     <div class="dailybar">
       <div class="field"><label>Responsável</label><select id="recxSelect" class="btn" style="min-width:330px"><option value="0">Bruna Padilha</option><option value="1">Calusa Grendene Maculan</option><option value="2">Daniel Felin</option><option value="3">Fabio Prates Pereira</option><option value="4">Fernanda Maria dos Santos</option><option value="5">Fernanda Rosa Guedes</option><option value="6">Franciele Silva</option><option value="7">Gabriel Brum Sturza</option><option value="8">Joao Matheus Bertoncello</option><option value="9">Karla Monteiro Saldanha</option><option value="10">Pamela Baggio</option><option value="11">Paola Flores Raimundo</option><option value="12">Rhafael Medeiros Casceres</option><option value="13">Thais Rodrigues da Silva</option><option value="14">Evelin Cristina Rockenbach</option><option value="15">Isadora de Nardin</option><option value="16">Rafael Neves Calil</option><option value="17">Maico Aires da Silveira</option><option value="18">Pablissio Lopes da Silva</option><option value="19">Luan Costa Cezimbra Silveira</option><option value="20">Felipe Panizzon da Silva</option><option value="21">Vicente Cunha</option><option value="22">Eviany Maidana</option><option value="23">Daniela Santos</option><option value="24">Thayna Vieira</option><option value="25">Thais Gomez da Rosa</option><option value="26">Morgana Castilhos</option><option value="27">Nadiny Righi da Silva</option><option value="28">Ana Paula Barbieri</option><option value="29">Lurian Kezia Machado Baal</option><option value="30">Leonardo Lima Adamy</option><option value="31">Dion Marcos Cerezer Schutz</option><option value="32">Eduardo Tietz</option><option value="33">Tiago Scotti dos Santos</option><option value="34">Tiago Medeiros da Rosa</option><option value="35">Retorno</option><option value="36">Atendidas</option></select></div>
@@ -372,6 +454,8 @@ body{padding:12px;background:radial-gradient(circle at 12% 8%,#1b1007 0,#070707 
   <div class="footer">
     Fonte dos dados: Excel carregado pelo usuário. O painel utiliza a aba “Geral” para os indicadores mensais de atendimento, “Atual” para os indicadores diários de desempenho, “% n2 geral” para o indicador de N2 Geral e “recxreg” para o comparativo por responsável. Os dados são processados localmente no navegador.
   </div>
+
+</div>
 </main></div>
 
 </div>
@@ -1090,6 +1174,69 @@ loadEmbedded();
     document.addEventListener('DOMContentLoaded', inicializarProtecaoIndicador6);
   }else{
     inicializarProtecaoIndicador6();
+  }
+})();
+</script>
+
+<script id="painel-lock-script">
+(function(){
+  "use strict";
+  const SALT = "GTEK-PAINEL-2026";
+  const SENHA_HASH = "435b9e1b0d4b482d6fc3d6a863cbcce65dd110029ba45d84e757e809006db7df";
+
+  async function sha256(text){
+    const data = new TextEncoder().encode(text);
+    const buffer = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(buffer))
+      .map(b => b.toString(16).padStart(2,"0")).join("");
+  }
+
+  function liberar(){
+    const box = document.getElementById("conteudoProtegido");
+    const overlay = document.getElementById("conteudoBloqueadoOverlay");
+    if(box) box.classList.add("conteudo-liberado");
+    if(overlay) overlay.style.display = "none";
+    sessionStorage.setItem("gtekPainelAutenticado","1");
+  }
+
+  async function validarSenha(){
+    const input = document.getElementById("painelPassword");
+    const error = document.getElementById("painelLoginError");
+    const hash = await sha256(SALT + input.value);
+
+    if(hash === SENHA_HASH){
+      liberar();
+    } else {
+      error.classList.add("show");
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  function iniciar(){
+    const input = document.getElementById("painelPassword");
+    const button = document.getElementById("painelLoginBtn");
+    const error = document.getElementById("painelLoginError");
+
+    if(sessionStorage.getItem("gtekPainelAutenticado") === "1"){
+      liberar();
+      return;
+    }
+
+    button.addEventListener("click", validarSenha);
+    input.addEventListener("keydown", function(e){
+      if(e.key === "Enter") validarSenha();
+    });
+    input.addEventListener("input", function(){
+      error.classList.remove("show");
+    });
+    setTimeout(() => input.focus(), 150);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", iniciar);
+  } else {
+    iniciar();
   }
 })();
 </script>
