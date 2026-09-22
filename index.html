@@ -397,6 +397,15 @@ body{
 }
 </style>
 
+<style>
+/* Ajuste do indicador 1.7 - elementos empilhados verticalmente */
+.n2geral-layout{
+  grid-template-columns:1fr !important;
+}
+.n2geral-chart{
+  width:100%;
+}
+</style>
 </head>
 <body>
 
@@ -551,11 +560,11 @@ body{
     <div class="n2geral-layout">
       <div class="card n2geral-chart">
         <h3>Gráfico 1 — Comparativo diário</h3>
-        <div style="height:290px"><canvas id="n2GeralChart" style="box-sizing: border-box; display: block; height: 290px; width: 524px;" width="524" height="290"></canvas></div>
+        <div style="height:290px"><canvas id="n2GeralChart" style="box-sizing: border-box; display: block; height: 290px; width: 950px;" width="950" height="290"></canvas></div>
       </div>
       <div class="card n2geral-chart">
         <h3>Gráfico 2 — Comparativo diário: Registros</h3>
-        <div style="height:290px"><canvas id="n2GeralChart2" style="box-sizing: border-box; display: block; height: 290px; width: 380px;" width="380" height="290"></canvas></div>
+        <div style="height:290px"><canvas id="n2GeralChart2" style="box-sizing: border-box; display: block; height: 290px; width: 950px;" width="950" height="290"></canvas></div>
       </div>
       <div class="card">
         <h3>Detalhamento diário</h3>
